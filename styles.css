@@ -1,3 +1,58 @@
+#puzzle{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.container {
+    grid-area: body;
+    margin: 2rem;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 5px;
+}
 
+.cell {
+   
+    background: url(dog.jpeg) no-repeat;
+    height: 166px;
+    width: 166px;
+    background-clip: content-box;
+}
 
+#first {
+    background-position: 0px 0px;
+}
+
+#second {
+    background-position: -166px 0px;
+}
+
+#third {
+    background-position: -332px 0px;
+}
+
+#fourth {
+    background-position: 0px -166px;
+}
+
+#fifth {
+    background-position: -166px -166px;
+}
+
+#sixth {
+    background-position: -332px -166px;
+}
+
+#seventh {
+    background-position: 0px -332px;
+}
+
+#eigth {
+    background-position: -166px -332px;
+}
+
+#ninth {
+    background-position: -332px -332px;
+} 
 
