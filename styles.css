@@ -9,50 +9,61 @@
     display: inline-grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "pos1 pos2 pos3"
+                         "pos4 pos5 pos6"
+                         "pos7 pos8 pos9";
     grid-gap: 5px;
 }
 
-.cell {
-   
+.tile {
     background: url(dog.jpeg) no-repeat;
     height: 166px;
     width: 166px;
     background-clip: content-box;
 }
 
-#first {
+#one {
     background-position: 0px 0px;
+    grid-area: "one";
 }
 
-#second {
+#two {
     background-position: -166px 0px;
+    grid-area: "two";
 }
 
-#third {
+#three {
     background-position: -332px 0px;
+    grid-area: "three";
 }
 
-#fourth {
+#four {
     background-position: 0px -166px;
+    grid-area: "four";
 }
 
-#fifth {
+#five {
     background-position: -166px -166px;
+    grid-area: "five";
 }
 
-#sixth {
+#six {
     background-position: -332px -166px;
+    grid-area: "six"
 }
 
-#seventh {
+#seven {
     background-position: 0px -332px;
+    grid-area: "seven";
 }
 
-#eigth {
+#eight {
     background-position: -166px -332px;
+    grid-area: "eight";
 }
 
-#ninth {
-    background-position: -332px -332px;
+#nine {
+    background: white;
+    grid-area:"nine";
 } 
 
