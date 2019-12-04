@@ -64,9 +64,9 @@ function checkWin() {
 
 //This shuffle function runs at the beginning of the game. 
 //We start from a solved puzzle and make 100 moves to ensure the puzzle is solvable for the user. 
-function shuffle() {
+function shuffle(moves) {
     let blank = 'nine';
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < moves; i++) {
         let swaps = neighbors[blank];
         let index = Math.floor((Math.random() * swaps.length));
         let id = swaps[index];
@@ -76,10 +76,14 @@ function shuffle() {
     }
 }
 
-const startButton = document.querySelector('.start-button');
-startButton.addEventListener('click', startGame);
+const startEasy = document.querySelector('.start-easy');
+const startMedium = document.querySelector('.start-medium');
+const startHard = document.querySelector('.start-hard');
+startEasy.addEventListener('click', () => startGame(5));
+startMedium.addEventListener('click', () => startGame(15));
+startHard.addEventListener('click', ()=> startGame(50));
 
 //This is where the game is initiated. 
-function startGame() {
-    shuffle();
+function startGame(moves) {
+    shuffle(moves);
 }
