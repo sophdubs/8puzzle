@@ -9,50 +9,53 @@
     display: inline-grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "one two three"
+                        "four five six"
+                        "seven eight nine";
     grid-gap: 5px;
 }
 
-.cell {
-   
+.tile {
     background: url(dog.jpeg) no-repeat;
     height: 166px;
     width: 166px;
     background-clip: content-box;
 }
 
-#first {
+#one {
     background-position: 0px 0px;
 }
 
-#second {
+#two {
     background-position: -166px 0px;
 }
 
-#third {
+#three {
     background-position: -332px 0px;
 }
 
-#fourth {
+#four {
     background-position: 0px -166px;
 }
 
-#fifth {
+#five {
     background-position: -166px -166px;
 }
 
-#sixth {
+#six {
     background-position: -332px -166px;
 }
 
-#seventh {
+#seven {
     background-position: 0px -332px;
 }
 
-#eigth {
+#eight {
     background-position: -166px -332px;
 }
 
-#ninth {
+#nine {
+    display:none;
     background-position: -332px -332px;
 } 
 
