@@ -86,4 +86,29 @@ startHard.addEventListener('click', ()=> startGame(50));
 //This is where the game is initiated. 
 function startGame(moves) {
     shuffle(moves);
+    updateTimer();
+}
+
+const timer = document.querySelector('.timer');
+function updateTimer() {
+    count = 0;
+    setInterval(() => {
+        count += 1;
+        const formattedTime = formatTime(count);
+        timer.innerHTML = formattedTime;
+    }, 1000);
+}
+
+function formatTime(count) {
+    minutes = count % 60;
+    hours = Math.floor(count/60);
+
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
+    if (hours < 10) {
+        hours = `0${hours}`;
+    }
+
+    return `${hours}:${minutes}`;
 }
