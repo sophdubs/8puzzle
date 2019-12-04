@@ -1,4 +1,3 @@
-const nums = [null, 'pos1', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 const neighbors = {
     'one': ['two', 'four'],
     'two': ['one', 'three', 'five'],
@@ -17,26 +16,26 @@ tiles.forEach(tile => tile.addEventListener("click", switchTiles))
 
 function switchTiles() {
     let tile = this.id;
-    console.log(tile);
     let pos = this.dataset.pos;
     let swaps = neighbors[pos];
     checkNeighbors(swaps, this);
 }
 
 function checkNeighbors(swaps, tile) {
-    console.log(swaps);
     if(swaps.includes(blankTile.dataset.pos)) {
         swap(tile, blankTile)
     } 
 }
 
-function swap(tile, blank) {
+function swap(tile, blank, shuffling=false) {
     let temp = tile.dataset.pos;
     tile.dataset.pos = blank.dataset.pos;
     blank.dataset.pos = temp;
     tile.style.gridArea = tile.dataset.pos;
     blank.style.gridArea = blank.dataset.pos;
-    checkWin();
+    if (!shuffling) {
+        checkWin();
+    }
 }
 
 function checkWin() {
@@ -47,11 +46,23 @@ function checkWin() {
         }
     })
     if (win) {
-        console.log('You Win!');
         blankTile.classList.add('win');
+        setTimeout(() => {alert('You Win!')}, 500);
     }
 }
 
+function shuffle() {
+    let blank = 'nine';
+    for (let i = 0; i < 100; i++) {
+        let swaps = neighbors[blank];
+        let index = Math.floor((Math.random() * swaps.length));
+        let id = swaps[index];
+        tile = document.getElementById(id);
+        swap(tile, blankTile, true);
+        blank = tile.id;
+    }
+}
+shuffle();
 
 
 
