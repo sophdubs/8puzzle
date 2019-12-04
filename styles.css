@@ -9,9 +9,9 @@
     display: inline-grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: "pos1 pos2 pos3"
-                         "pos4 pos5 pos6"
-                         "pos7 pos8 pos9";
+    grid-template-areas: "one two three"
+                         "four five six"
+                         "seven eight nine";
     grid-gap: 5px;
 }
 
@@ -67,3 +67,8 @@
     grid-area:"nine";
 } 
 
+#nine.win {
+    background: url(dog.jpeg) no-repeat;
+    background-position: -332px -332px;
+    grid-area:"nine";
+}
