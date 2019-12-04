@@ -1,10 +1,10 @@
 #puzzle{
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
+
 .container {
-    grid-area: body;
     margin: 2rem;
     display: inline-grid;
     grid-template-columns: 1fr 1fr 1fr;
