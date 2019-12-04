@@ -9,9 +9,9 @@
     display: inline-grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: "one two three"
-                        "four five six"
-                        "seven eight nine";
+    grid-template-areas: "pos1 pos2 pos3"
+                         "pos4 pos5 pos6"
+                         "pos7 pos8 pos9";
     grid-gap: 5px;
 }
 
@@ -24,38 +24,46 @@
 
 #one {
     background-position: 0px 0px;
+    grid-area: "one";
 }
 
 #two {
     background-position: -166px 0px;
+    grid-area: "two";
 }
 
 #three {
     background-position: -332px 0px;
+    grid-area: "three";
 }
 
 #four {
     background-position: 0px -166px;
+    grid-area: "four";
 }
 
 #five {
     background-position: -166px -166px;
+    grid-area: "five";
 }
 
 #six {
     background-position: -332px -166px;
+    grid-area: "six"
 }
 
 #seven {
     background-position: 0px -332px;
+    grid-area: "seven";
 }
 
 #eight {
     background-position: -166px -332px;
+    grid-area: "eight";
 }
 
 #nine {
-    display:none;
-    background-position: -332px -332px;
+    background: white;
+    grid-area:"nine";
 } 
 
