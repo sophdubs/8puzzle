@@ -76,8 +76,10 @@ function shuffle() {
     }
 }
 
+const startButton = document.querySelector('.start-button');
+startButton.addEventListener('click', startGame);
+
 //This is where the game is initiated. 
-shuffle();
-
-
-
+function startGame() {
+    shuffle();
+}
