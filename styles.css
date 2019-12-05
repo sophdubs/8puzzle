@@ -72,3 +72,7 @@
     background-position: -332px -332px;
     grid-area:"nine";
 }
+
+.paused {
+    filter: blur(60px);
+}

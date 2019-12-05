@@ -76,6 +76,10 @@ function shuffle(moves) {
     }
 }
 
+//Different buttons for different starting difficulties:
+//Easy starts 5 moves away from solved
+//Medium starts 15 moves away from solved
+//Hard starts 50 moves away from solved
 const startEasy = document.querySelector('.start-easy');
 const startMedium = document.querySelector('.start-medium');
 const startHard = document.querySelector('.start-hard');
@@ -89,6 +93,7 @@ function startGame(moves) {
     updateTimer();
 }
 
+//Grab the timer div on the document to be able to update the innerHTML as the seconds tic by. 
 const timer = document.querySelector('.timer');
 let t;
 function updateTimer(count=0, pause=false) {
@@ -104,6 +109,7 @@ function updateTimer(count=0, pause=false) {
     }, 1000);
 }
 
+//Formats the time properly to fit on the timer. (00:00)
 function formatTime(count) {
     minutes = count % 60;
     hours = Math.floor(count/60);
@@ -116,20 +122,28 @@ function formatTime(count) {
     return `${hours}:${minutes}`;
 }
 
+//Grabbing the pause and resume buttons. 
+//Adding event listeners to handle the pause and resume click events.
 let pause = document.querySelector('.pause-button');
 pause.addEventListener('click', handlePause);
 let resume = document.querySelector('.resume-button');
 resume.addEventListener('click', handleResume);
 
+const puzzleContainer = document.querySelector('#puzzle-container');
+
+//Clears timers interval by passing pause = true
 function handlePause() {
     updateTimer(0,true);
+    puzzleContainer.classList.add('paused');
+
 }
 
+//Resets timer by passing in the current count and starting a new set interval to update the count every second. 
 function handleResume() {
     console.log(timer.innerHTML);
     let regexp = /(\d\d):(\d\d)/
     let time = timer.innerHTML.match(regexp);
     count = parseInt(time[1]) * 60 + parseInt(time[2]);
     updateTimer(count);
-    console.log(count);
+    puzzleContainer.classList.remove('paused');
 }
