@@ -90,9 +90,14 @@ function startGame(moves) {
 }
 
 const timer = document.querySelector('.timer');
-function updateTimer() {
-    count = 0;
-    setInterval(() => {
+let t;
+function updateTimer(count=0, pause=false) {
+    if(pause) {
+        clearInterval(t);
+        console.log('stopped timer');
+        return;
+    }
+    t = setInterval(() => {
         count += 1;
         const formattedTime = formatTime(count);
         timer.innerHTML = formattedTime;
@@ -102,13 +107,29 @@ function updateTimer() {
 function formatTime(count) {
     minutes = count % 60;
     hours = Math.floor(count/60);
-
     if (minutes < 10) {
         minutes = `0${minutes}`;
     }
     if (hours < 10) {
         hours = `0${hours}`;
     }
-
     return `${hours}:${minutes}`;
+}
+
+let pause = document.querySelector('.pause-button');
+pause.addEventListener('click', handlePause);
+let resume = document.querySelector('.resume-button');
+resume.addEventListener('click', handleResume);
+
+function handlePause() {
+    updateTimer(0,true);
+}
+
+function handleResume() {
+    console.log(timer.innerHTML);
+    let regexp = /(\d\d):(\d\d)/
+    let time = timer.innerHTML.match(regexp);
+    count = parseInt(time[1]) * 60 + parseInt(time[2]);
+    updateTimer(count);
+    console.log(count);
 }
