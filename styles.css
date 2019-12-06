@@ -223,9 +223,6 @@ body {
     border: 11px dashed white;
 }
 
-
-
-
 /* BUTTON STYLE */
 
 .button {
@@ -250,3 +247,52 @@ body {
     box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.4s ease 0s;
 }
+
+.modal {
+    width: 500px;
+    height: 575px;
+    background: url(dog-modal.jpeg) no-repeat;
+    border: 11px dashed white;
+}
+
+.pug-club {
+    position: relative;
+    top: 50%;
+    left: 5%;
+    color: white;
+    font-family: Marker Felt, fantasy;
+}
+
+.pug-club h2 {
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+
+.pug-club h4 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
+
+.modal-no-show {
+    display: none;
+
+}
+
+.modal-show {
+    display: block;
+    position: absolute;
+    top: 24%;
+    left:30%;
+}
+
+.win-blur {
+    filter: blur(80px);
+}
+
+
+/* COME BACK TO THIS. BLUR THE PAGE WHEN MODAL POPS UP */
+/* .modal-open {
+    filter: blur(60px);
+} */

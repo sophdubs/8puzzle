@@ -41,11 +41,19 @@ function swap(tile, blank, shuffling=false) {
     //Swapping their actual positions in the grid
     tile.style.gridArea = tile.dataset.pos;
     blank.style.gridArea = blank.dataset.pos;
+
+    
+    
     //This is just to avoid any issues while shuffling the puzzle at beginning of game. 
     if (!shuffling) {
+        moves += 1;
+        movesCounter.innerHTML = moves;
         checkWin();
     }
 }
+
+
+let modal = document.querySelector('.modal');
 
 //If all tiles have matching ids and data-pos attributes, then they are in their original spots and the puzzle has been solved successfully. 
 function checkWin() {
@@ -61,6 +69,8 @@ function checkWin() {
         clearInterval(t);
         timer.innerHTML = "00:00";
         setTimeout(() => {alert('You Win!')}, 500);
+        modal.classList.remove('modal-no-show');
+        modal.classList.add('modal-show');
     }
 }
 
@@ -89,8 +99,13 @@ startEasy.addEventListener('click', () => startGame(1));
 startMedium.addEventListener('click', () => startGame(15));
 startHard.addEventListener('click', ()=> startGame(50));
 
+let moves = 0;
+const movesCounter = document.querySelector('.move-counter');
+
+
 //This is where the game is initiated. 
 function startGame(moves) {
+    movesCounter.innerHTML = '0';
     blankTile.classList.remove('win');
     if (t !== undefined) {
         clearInterval(t);
