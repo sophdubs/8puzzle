@@ -58,6 +58,8 @@ function checkWin() {
     //Adding 'win' to the bankTile's classList allows us to view the missing tile image. 
     if (win) {
         blankTile.classList.add('win');
+        clearInterval(t);
+        timer.innerHTML = "00:00";
         setTimeout(() => {alert('You Win!')}, 500);
     }
 }
@@ -83,23 +85,26 @@ function shuffle(moves) {
 const startEasy = document.querySelector('.start-easy');
 const startMedium = document.querySelector('.start-medium');
 const startHard = document.querySelector('.start-hard');
-startEasy.addEventListener('click', () => startGame(5));
+startEasy.addEventListener('click', () => startGame(1));
 startMedium.addEventListener('click', () => startGame(15));
 startHard.addEventListener('click', ()=> startGame(50));
 
 //This is where the game is initiated. 
 function startGame(moves) {
+    blankTile.classList.remove('win');
+    if (t !== undefined) {
+        clearInterval(t);
+    }
     shuffle(moves);
     updateTimer();
 }
 
 //Grab the timer div on the document to be able to update the innerHTML as the seconds tic by. 
-const timer = document.querySelector('.timer');
+const timer = document.querySelector('.timer-text');
 let t;
 function updateTimer(count=0, pause=false) {
     if(pause) {
         clearInterval(t);
-        console.log('stopped timer');
         return;
     }
     t = setInterval(() => {
@@ -124,27 +129,29 @@ function formatTime(count) {
 
 //Grabbing the pause and resume buttons. 
 //Adding event listeners to handle the pause and resume click events.
-let pause = document.querySelector('.pause-button');
-pause.addEventListener('click', handlePause);
-let resume = document.querySelector('.resume-button');
-resume.addEventListener('click', handleResume);
+let pauseResume = document.querySelector('.pause-resume');
+pauseResume.addEventListener('click', handlePauseResume);
+
 
 const puzzleContainer = document.querySelector('#puzzle-container');
 
 //Clears timers interval by passing pause = true
-function handlePause() {
-    updateTimer(0,true);
-    puzzleContainer.classList.add('paused');
-
+function handlePauseResume() {
+    if (this.classList.contains('pause')) {
+        this.classList.remove('pause');
+        this.innerHTML='PAUSE';
+        let time = timer.innerHTML.match(/(\d\d):(\d\d)/);
+        count = parseInt(time[1])*60 + parseInt(time[2]);
+        updateTimer(count);
+        puzzleContainer.classList.remove('paused');
+    
+    } else {
+        updateTimer(0,true);
+        puzzleContainer.classList.add('paused');
+        this.innerHTML='RESUME';
+        this.classList.add('pause');
+    }
 }
 
-//Resets timer by passing in the current count and starting a new set interval to update the count every second. 
-function handleResume() {
-    console.log(timer.innerHTML);
-    let regexp = /(\d\d):(\d\d)/
-    let time = timer.innerHTML.match(regexp);
-    count = parseInt(time[1]) * 60 + parseInt(time[2]);
-    updateTimer(count);
-    puzzleContainer.classList.remove('paused');
-}
+
 
