@@ -9,7 +9,7 @@
     <title>8puzzle</title>       
 </head>
 <body>
-    <div id="page" class="win-blur">
+    <div id="page" class=>
         <h1 class="title">8-Puggle!</h1>
         <div id="puzzle-container" class="container">
             <div id="one" class="tile" data-pos="one"></div>
@@ -39,43 +39,42 @@
         </div>
         <button class="pause-resume button ">PAUSE</button>
         
+        <div class="lb-h1">
+            <h1 class="lb-h1">Leaderboards</h1>
+            <p class="sort-by-button sbm">sort by moves</p>
+        </div>
+            
         <div class="leaderboards">
             
             <div class="leaderboard leaderboard-easy">
                 <h1 class='lb-title'>Easy</h1>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
+                <ul class="easy-list sort-by-moves"></ul>
             </div>
-            
             <div class="leaderboard leaderboard-medium">
                 <h1 class='lb-title'>Medium</h1>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
+                <ul class="medium-list sort-by-moves"></ul>
             </div>
             <div class="leaderboard leaderboard-hard">
                 <h1 class='lb-title'>Hard</h1>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>
-                <p>Sophie Dubois</p>   
+                <ul class="hard-list sort-by-moves"></ul>  
             </div>
         </div>        
     </div>
 
-    <div class="modal modal-show">
+    <div class="modal modal-no-show">
+        <p class="modal-close">X</p>
         <div class="pug-club">
             <h2>Join The Pug-Club</h2>
             <h4>enter your name to join the leaderboard</h4>
             <form action="submit" class="modal-form">
-                <input type="text" name="name">
+                <input class="modal-input-box" type="text" name="name">
                 <button class="modal-button">join</button>
             </form>
         </div>
     </div>
-        <script src="index.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script type="text/javascript" src="fbConfig.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

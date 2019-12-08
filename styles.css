@@ -1,5 +1,5 @@
 body {
-    background: #EDB506;
+    background: #edb531;
 }
 
 #page{
@@ -13,6 +13,7 @@ body {
     'left1 puzzle right1'
     'left2 puzzle right2'
     'left3 puzzle right3'
+    'footer footer footer'
     'bottom bottom bottom'
     'bottom bottom bottom';          
     grid-gap: 10px;
@@ -21,10 +22,9 @@ body {
     border-left: 11px dashed #000000;
     border-right: 11px dashed #000000;
     padding-left: 50px;
-    padding-right: 50px;
-   
-    
+    padding-right: 50px; 
 }
+
 .container {
     margin: 2rem;
     display: grid;
@@ -35,20 +35,20 @@ body {
                          "seven eight nine";
     grid-gap: 5px; 
     grid-area: puzzle;
-    border: 11px dashed white;
-    
+    border: 11px dashed white; 
 }
 
 .leaderboards {
+    width: 90%;
+    padding-top: 50px;
     display: grid;
     margin: 0 auto;
     grid-auto-rows: minmax(100px, auto);
-    max-width: 1200px;
+    /* max-width: 1200px; */
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "easy medium hard";
     grid-area: bottom;
     grid-gap: 75px;
-
 }
 
 .tile {
@@ -120,9 +120,9 @@ body {
     font-weight: bold;
     font-family: Marker Felt, fantasy;
     margin-top: 10px;
-    margin-bottom: 0;
-  
+    margin-bottom: 0; 
 }
+
 .start-easy{
     grid-area: left1;
     font-size: 45px;
@@ -169,7 +169,6 @@ body {
     font-weight: bold;  
     font-size:35px;
     margin-bottom: 0px;
-
 }
 
 .moves {
@@ -206,24 +205,43 @@ body {
     width:75%;
 }
 
+.lb-h1 {
+    grid-area: footer;
+    text-align: center;
+    font-family: Marker Felt, fantasy;
+    font-size: 70px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sort-by-button {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 40px;
+    background: red;
+    border-radius: 30%;
+    color: white;
+
+}
+
 .leaderboard-easy {
     grid-area: easy;
-    background: rgb(206, 113, 6);
-    outline: 10px dashed white;
+    background: hsl(45, 92%, 35%);
+    outline: 11px dashed white;
 
 }
 
 .leaderboard-medium {
     grid-area: medium;
-    border: 11px dashed red;
+    background: hsl(45, 92%, 35%);
+    outline: 11px dashed red;
 }
 
 .leaderboard-hard {
     grid-area: hard;
-    border: 11px dashed white;
+    background: hsl(45, 92%, 35%);
+    outline: 11px dashed white;
 }
-
-/* BUTTON STYLE */
 
 .button {
     color: #fff !important;
@@ -236,8 +254,7 @@ body {
     border: none;
     transition: all 0.4s ease 0s;
     height:50%;
-    
-    }
+}
 
 .button:hover {
     background: #434343;
@@ -273,11 +290,8 @@ body {
     margin-bottom: 10px;
 }
 
-
-
 .modal-no-show {
     display: none;
-
 }
 
 .modal-show {
@@ -287,12 +301,50 @@ body {
     left:30%;
 }
 
-.win-blur {
-    filter: blur(80px);
+.modal-open {
+    filter: blur(90px);
 }
 
+.modal-close {
+    position: absolute;
+    right: 4%;
+    top: 1%;
+    font-family: Marker Felt, fantasy;
+    color: white;
+}
 
-/* COME BACK TO THIS. BLUR THE PAGE WHEN MODAL POPS UP */
-/* .modal-open {
-    filter: blur(60px);
-} */
+.modal-button {
+    color: black;
+    font-family: Marker Felt, fantasy;
+    font-size: 13px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.modal-input-box {
+    border-radius: 5px;
+}
+
+.leaderboard  h1{
+    font-family: Marker Felt, fantasy;
+    color: white;
+    font-size: 45px;
+    text-align: center;
+}
+
+.leaderboard ul {
+    list-style-type: none;
+    font-size: 25px;
+    text-align: left;
+    color: white;
+    font-family: Chalkduster, fantasy;
+    padding-right: 40px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}

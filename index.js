@@ -19,9 +19,11 @@ let blankTile = document.querySelector('#nine');
 //This is the first method called when user clicks on a tile.
 //It finds its neighbors and then calls checkNeighbors to see if one of them is the blank tile.
 function switchTiles() {
-    let pos = this.dataset.pos;
-    let swaps = neighbors[pos];
-    checkNeighbors(swaps, this);
+    if (difficulty !== null) {
+        let pos = this.dataset.pos;
+        let swaps = neighbors[pos];
+        checkNeighbors(swaps, this);
+    }
 }
 
 //This functions checks whether the swaps array contains the blank tile.
@@ -46,14 +48,15 @@ function swap(tile, blank, shuffling=false) {
     
     //This is just to avoid any issues while shuffling the puzzle at beginning of game. 
     if (!shuffling) {
-        moves += 1;
-        movesCounter.innerHTML = moves;
+        movesMade += 1;
+        movesCounter.innerHTML = movesMade;
         checkWin();
     }
 }
 
 
 let modal = document.querySelector('.modal');
+
 
 //If all tiles have matching ids and data-pos attributes, then they are in their original spots and the puzzle has been solved successfully. 
 function checkWin() {
@@ -65,26 +68,22 @@ function checkWin() {
     })
     //Adding 'win' to the bankTile's classList allows us to view the missing tile image. 
     if (win) {
-        blankTile.classList.add('win');
         clearInterval(t);
-        timer.innerHTML = "00:00";
-        setTimeout(() => {alert('You Win!')}, 500);
         modal.classList.remove('modal-no-show');
         modal.classList.add('modal-show');
+        page.classList.add('modal-open');
     }
 }
 
 //This shuffle function runs at the beginning of the game. 
-//We start from a solved puzzle and make 100 moves to ensure the puzzle is solvable for the user. 
-function shuffle(moves) {
-    let blank = 'nine';
-    for (let i = 0; i < moves; i++) {
-        let swaps = neighbors[blank];
+function shuffle(movesFromSolved) {
+    for (let i = 0; i < movesFromSolved; i++) {
+        // let blank = 'nine';
+        let swaps = neighbors[blankTile.dataset.pos];
         let index = Math.floor((Math.random() * swaps.length));
         let id = swaps[index];
         tile = document.getElementById(id);
         swap(tile, blankTile, true);
-        blank = tile.id;
     }
 }
 
@@ -92,26 +91,29 @@ function shuffle(moves) {
 //Easy starts 5 moves away from solved
 //Medium starts 15 moves away from solved
 //Hard starts 50 moves away from solved
+const EASY = 1;
+const MEDIUM = 2;
+const HARD = 3;
+let difficulty = null;
 const startEasy = document.querySelector('.start-easy');
 const startMedium = document.querySelector('.start-medium');
 const startHard = document.querySelector('.start-hard');
-startEasy.addEventListener('click', () => startGame(1));
-startMedium.addEventListener('click', () => startGame(15));
-startHard.addEventListener('click', ()=> startGame(50));
+startEasy.addEventListener('click', () => startGame(EASY));
+startMedium.addEventListener('click', () => startGame(MEDIUM));
+startHard.addEventListener('click', ()=> startGame(HARD));
 
-let moves = 0;
+let movesMade = 0;
 const movesCounter = document.querySelector('.move-counter');
 
 
 //This is where the game is initiated. 
-function startGame(moves) {
-    movesCounter.innerHTML = '0';
-    blankTile.classList.remove('win');
-    if (t !== undefined) {
-        clearInterval(t);
-    }
-    shuffle(moves);
+function startGame(movesFromStart) {
+    resetGame();
+    shuffle(movesFromStart);
     updateTimer();
+    if (movesFromStart === EASY) difficulty = 'easy';
+    if (movesFromStart === MEDIUM) difficulty = 'medium';
+    if (movesFromStart === HARD) difficulty = 'hard';
 }
 
 //Grab the timer div on the document to be able to update the innerHTML as the seconds tic by. 
@@ -155,8 +157,8 @@ function handlePauseResume() {
     if (this.classList.contains('pause')) {
         this.classList.remove('pause');
         this.innerHTML='PAUSE';
-        let time = timer.innerHTML.match(/(\d\d):(\d\d)/);
-        count = parseInt(time[1])*60 + parseInt(time[2]);
+        
+        let count = htmlToCount(timer.innerHTML);
         updateTimer(count);
         puzzleContainer.classList.remove('paused');
     
@@ -168,5 +170,133 @@ function handlePauseResume() {
     }
 }
 
+function htmlToCount(html) {
+    let time = html.match(/(\d\d):(\d\d)/);
+    let count = parseInt(time[1]) * 60 + parseInt(time[2]);
+    return count;
+}
 
+const modalForm = document.querySelector('.modal-form');
+modalForm.addEventListener('submit', handleModalSubmit);
+
+const modalX = document.querySelector('.modal-close');
+modalX.addEventListener('click', closeModal);
+
+function handleModalSubmit(e) {
+    e.preventDefault();
+    let name = e.target.name.value;
+    let time = timer.innerHTML;
+    let moves = movesCounter.innerHTML;
+
+    db.collection(difficulty).add({
+        name: name,
+        moves: moves,
+        time: time
+    })
+    .then(() => {
+        fetchLeaderboard(difficulty);
+        closeModal()
+    });
+}
+
+const page = document.querySelector('#page');
+
+function closeModal() {
+    page.classList.remove('modal-open');
+    modal.classList.remove("modal-show");
+    modal.classList.add('modal-no-show');
+    resetGame();
+}
+
+
+function resetGame(){
+    tiles.forEach(tile => {
+        tile.style.gridArea = tile.id;
+        tile.dataset.pos = tile.id;
+    });
+    movesMade = 0;
+    movesCounter.innerHTML = movesMade;
+    if (t !== undefined) {
+        clearInterval(t);
+    }
+    timer.innerHTML = '00:00';
+    difficulty = null;
+    blankTile.classList.remove('win');
+}
+
+//DB STUFF
+firebase.initializeApp(fbConfig);
+let db = firebase.firestore();
+
+function fetchLeaderboard(diff) {
+    let info = [];
+    db.collection(diff).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            info.push(doc.data());
+        })
+    }).then(() => {
+        updateLeaderboards(info, diff);
+    }) 
+}
+
+
+function updateLeaderboards(arr, diff) {
+    const lb = document.querySelector(`.${diff}-list`);
+    lb.innerHTML = "";
+    let sortedArr;
+    if (sortButton.classList.contains('sbm')) {
+        sortedArr = sortByMoves(arr);
+        sortedArr.forEach(leader => {
+            let listItem = document.createElement('li');
+            listItem.innerHTML = `${leader.name}<span class="right">${leader.moves}</span>`;
+            lb.appendChild(listItem);
+        })
+    } else {
+        sortedArr = sortByTime(arr);
+        sortedArr.forEach(leader => {
+            let listItem = document.createElement('li');
+            listItem.innerHTML = `${leader.name}<span class="right">${leader.time}</span>`;
+            lb.appendChild(listItem);
+        })
+    }
+}
+
+function sortByMoves(arr) {
+    sorted = arr.sort((a,b) => {
+        return parseInt(a.moves) - parseInt(b.moves);
+    });
+    return sorted;
+}
+
+function sortByTime(arr) {
+    sorted = arr.sort((a,b) =>{
+        a = htmlToCount(a.time);
+        b = htmlToCount(b.time);
+        return a - b;
+    });
+    return sorted;
+}
+
+let sortButton = document.querySelector('.sort-by-button');
+sortButton.addEventListener('click', toggleSort);
+
+function toggleSort() {
+    if (sortButton.classList.contains('sbm')) {
+        sortButton.classList.remove('sbm');
+        sortButton.classList.add('sbt');
+        sortButton.innerHTML = "sort by time";
+    } else {
+        sortButton.classList.remove('sbt');
+        sortButton.classList.add('sbm');
+        sortButton.innerHTML = "sort by moves";
+    }
+    fetchLeaderboard('easy');
+    fetchLeaderboard('medium');
+    fetchLeaderboard('hard');
+}
+
+fetchLeaderboard('easy');
+fetchLeaderboard('medium');
+fetchLeaderboard('hard');
+resetGame();
 
