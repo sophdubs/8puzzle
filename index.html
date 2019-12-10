@@ -9,7 +9,7 @@
     <title>8puzzle</title>       
 </head>
 <body>
-    <div id="page" class=>
+    <div id="page" class="borders">
         <h1 class="title">8-Puggle!</h1>
         <div id="puzzle-container" class="container">
             <div id="one" class="tile" data-pos="one"></div>
@@ -23,24 +23,22 @@
             <div id="nine" class="tile" data-pos="nine"></div>
         </div>
         
-        <button class="start-easy button">Easy</button>
-        <button class="start-medium button">Medium</button>
-        <button class="start-hard button">Hard</button>
+        <button class="start-easy button difficulty">Easy</button>
+        <button class="start-medium button difficulty">Medium</button>
+        <button class="start-hard button difficulty">Hard</button>
           
         
         <div class="move-count">
-            <div class="moves-div">
-                <p class="move-counter">0</p>
-                <p class="moves">MOVES</p>
-            </div>
+            <p class="move-counter">0</p>
+            <p class="moves">MOVES</p>
         </div>
         <div class="timer">
             <p class="timer-text">00:00</p>
         </div>
         <button class="pause-resume button ">PAUSE</button>
         
-        <div class="lb-h1">
-            <h1 class="lb-h1">Leaderboards</h1>
+        <div class="lb-header">
+            <h1 class="lb-h1">Pug-Club Leaderboards</h1>
             <p class="sort-by-button sbm">sort by moves</p>
         </div>
             
@@ -58,8 +56,13 @@
                 <h1 class='lb-title'>Hard</h1>
                 <ul class="hard-list sort-by-moves"></ul>  
             </div>
-        </div>        
+        </div>  
+        <div class="ps-section">
+            <p class="ps-1">psssst! wondering why so many leaders have such low times?</p>
+            <p class="ps2">try looking a little closer.. there might something hidden on the page!</p>
+        </div>      
     </div>
+    
 
     <div class="modal modal-no-show">
         <p class="modal-close">X</p>
@@ -71,6 +74,9 @@
                 <button class="modal-button">join</button>
             </form>
         </div>
+    </div>
+    <div class="hacker-div">
+        <button class="hacker-button">super secret hacker mode</button>
     </div>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
