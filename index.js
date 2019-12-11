@@ -1,3 +1,7 @@
+const grid = document.querySelector('.container');
+const { forceGridAnimation } = animateCSSGrid.wrapGrid(grid);
+
+
 //Different buttons for different starting difficulties:
 //Easy starts 5 moves away from solved
 //Medium starts 15 moves away from solved
@@ -136,6 +140,7 @@ function swap(tile, blank, shuffling=false) {
     //Swapping their actual positions in the grid
     tile.style.gridArea = tile.dataset.pos;
     blank.style.gridArea = blank.dataset.pos;
+    forceGridAnimation();
 
     //This is just to avoid any issues while shuffling the puzzle at beginning of game. 
     if (!shuffling) {
