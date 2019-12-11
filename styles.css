@@ -1,3 +1,5 @@
+/* MAIN PAGE STYLING */
+
 body {
     background: #edb531;
 }
@@ -28,8 +30,6 @@ body {
     border-left: 11px dashed #000000;
     border-right: 11px dashed #000000;
 }
-
-
 
 .container {
     margin: 2rem;
@@ -263,6 +263,7 @@ body {
     font-family: Marker Felt, fantasy;
     color: red;
 }
+
 .button {
     color: #fff !important;
     text-transform: uppercase;
@@ -284,6 +285,8 @@ body {
     box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.4s ease 0s;
 }
+
+/* MODAL STYLING */
 
 .modal {
     width: 500px;
@@ -345,7 +348,7 @@ body {
     border-radius: 5px;
 }
 
-/* Hacker Mode Stuff */
+/* HACKER MODE STYLING */
 
 .hacker-div {
     display: block;
@@ -411,7 +414,6 @@ body {
 
 .hacker-hard {
     background: rgb(236, 69, 97);
-    
 }
 
 .hacker-solve {
