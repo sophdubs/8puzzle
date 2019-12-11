@@ -318,6 +318,7 @@ function hackerMode() {
     if (hackerButton.classList.contains('clicked')) {
         hackerButton.classList.remove('clicked');
         hackerButton.innerHTML = "super secret hacker mode";
+        pauseResume.classList.remove('click-here');
         active = false;
     } else {
         hackerButton.classList.add('clicked');
@@ -412,4 +413,6 @@ function clickHereButton() {
     pauseResume.classList.add('click-here');
     pauseResume.innerHTML = "click";
 }
+
+
 
