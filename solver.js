@@ -31,3 +31,11 @@ function countManDistance(tile, pos){
         return vertical + horizontal;
     }
 }
+
+//Tested and working
+function findBlankNeighbors(state) {
+    //Finds current position of the blank tile
+    let blankPos = state.indexOf('nine');
+    let blankNeighbors = neighbors[stringToNum[blankPos]];
+    return blankNeighbors;
+}
