@@ -453,6 +453,9 @@ body {
     box-shadow: 0px 100px -10px white;
 }
 
+.hacker-button:focus {
+    outline: none;
+}
 
 
 
