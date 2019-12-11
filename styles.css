@@ -66,46 +66,55 @@ body {
 #one {
     background-position: 0px 0px;
     grid-area: "one";
+    z-index: 1;
 }
 
 #two {
     background-position: -166px 0px;
     grid-area: "two";
+    z-index: 1;
 }
 
 #three {
     background-position: -332px 0px;
     grid-area: "three";
+    z-index: 1;
 }
 
 #four {
     background-position: 0px -166px;
     grid-area: "four";
+    z-index: 1;
 }
 
 #five {
     background-position: -166px -166px;
     grid-area: "five";
+    z-index: 1;
 }
 
 #six {
     background-position: -332px -166px;
-    grid-area: "six"
+    grid-area: "six";
+    z-index: 1;
 }
 
 #seven {
     background-position: 0px -332px;
     grid-area: "seven";
+    z-index: 1;
 }
 
 #eight {
     background-position: -166px -332px;
     grid-area: "eight";
+    z-index: 1;
 }
 
 #nine {
     background: white;
     grid-area:"nine";
+    z-index: 0;
 } 
 
 .paused {
