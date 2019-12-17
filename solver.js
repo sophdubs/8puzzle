@@ -39,3 +39,5 @@ function findBlankNeighbors(state) {
     let blankNeighbors = neighbors[stringToNum[blankPos]];
     return blankNeighbors;
 }
+
+
